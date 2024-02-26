@@ -45,13 +45,16 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Column(
-                    children: [
-                      Shortener(),
-                      SizedBox(height: 100),
-                      Advertise(),
-                      SizedBox(height: 100),
-                    ],
+                  Container(
+                    margin: padding,
+                    child: Column(
+                      children: [
+                        Shortener(mobileView: mobileView),
+                        SizedBox(height: 100),
+                        Advertise(),
+                        SizedBox(height: 100),
+                      ],
+                    ),
                   ),
                 ],
               ),
