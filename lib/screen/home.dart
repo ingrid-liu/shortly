@@ -10,21 +10,31 @@ class HomePage extends StatelessWidget {
   const HomePage({super.key});
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    const EdgeInsets desktopPadding = EdgeInsets.symmetric(
+      vertical: 30.0,
+      horizontal: 170.0,
+    );
+    const EdgeInsets mobilePadding = EdgeInsets.symmetric(
+      vertical: 30.0,
+      horizontal: 20.0,
+    );
+    bool mobileView = screenSize.width < 1050;
+    EdgeInsets padding = mobileView ? mobilePadding : desktopPadding;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                margin: const EdgeInsets.symmetric(
-                    vertical: 30.0, horizontal: 170.0),
-                child: const Column(
+                margin: padding,
+                child: Column(
                   children: [
-                    TopNav(),
+                    TopNav(mobileView: mobileView),
                   ],
                 ),
               ),
-              const Welcome(),
+              Welcome(mobileView: mobileView),
               Stack(
                 children: [
                   Positioned.fill(
@@ -35,21 +45,21 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Column(
-                    children: [
-                      Shortener(),
-                      SizedBox(height: 100),
-                      Advertise(),
-                      SizedBox(height: 100),
-                    ],
+                  Container(
+                    margin: padding,
+                    child: Column(
+                      children: [
+                        Shortener(mobileView: mobileView),
+                        SizedBox(height: 100),
+                        Advertise(mobileView: mobileView),
+                        SizedBox(height: 100),
+                      ],
+                    ),
                   ),
                 ],
               ),
-              const Boost(),
-              const Align(
-                alignment: Alignment.bottomCenter,
-                child: BottomNav(),
-              )
+              Boost(mobileView: mobileView),
+              BottomNav(mobileView: mobileView)
             ]),
       ),
     );

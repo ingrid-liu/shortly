@@ -6,11 +6,13 @@ import 'package:shortly/widget/button.dart';
 class ShortenedUrlEntry extends StatefulWidget {
   final String rawUrl;
   final String shortenedUrl;
+  final mobileView;
 
   const ShortenedUrlEntry({
     super.key,
     required this.rawUrl,
     required this.shortenedUrl,
+    this.mobileView = false,
   });
 
   @override
@@ -32,8 +34,11 @@ class _ShortenedUrlEntryState extends State<ShortenedUrlEntry> {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         child: Flex(
-          direction: Axis.horizontal,
+          direction: widget.mobileView ? Axis.vertical : Axis.horizontal,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: widget.mobileView
+              ? CrossAxisAlignment.start
+              : CrossAxisAlignment.center,
           children: [
             Text(
               widget.rawUrl,
@@ -41,24 +46,40 @@ class _ShortenedUrlEntryState extends State<ShortenedUrlEntry> {
                     color: CustomColors.neutralVeryDarkViolet,
                   ),
             ),
-            Flex(direction: Axis.horizontal, children: [
-              Text(
-                widget.shortenedUrl,
-                style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                      color: CustomColors.primaryCyan,
-                    ),
-              ),
-              const SizedBox(width: 30),
-              Button(
-                displayText: _copied ? 'copied!' : "Copy",
-                radius: const Radius.circular(5),
-                textStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
-                      color: Colors.white,
-                    ),
-                onPressed: onCopy,
-                clickedColor: CustomColors.primaryDarkViolet,
-              ),
-            ]),
+            Divider(
+              color: Color.fromARGB(133, 227, 223, 223),
+              thickness: widget.mobileView ? 2 : 0,
+            ),
+            Flex(
+              direction: widget.mobileView ? Axis.vertical : Axis.horizontal,
+              crossAxisAlignment: widget.mobileView
+                  ? CrossAxisAlignment.start
+                  : CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Text(
+                    widget.shortenedUrl,
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                          color: CustomColors.primaryCyan,
+                        ),
+                  ),
+                ),
+                const SizedBox(width: 30),
+                SizedBox(
+                  width: widget.mobileView ? double.infinity : null,
+                  child: Button(
+                    displayText: _copied ? 'copied!' : "Copy",
+                    radius: const Radius.circular(5),
+                    textStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
+                          color: Colors.white,
+                        ),
+                    onPressed: onCopy,
+                    clickedColor: CustomColors.primaryDarkViolet,
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

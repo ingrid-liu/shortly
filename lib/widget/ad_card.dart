@@ -6,12 +6,14 @@ class AdCard extends StatelessWidget {
   final String iconPath;
   final String title;
   final String description;
+  final bool mobileView;
 
   const AdCard({
     super.key,
     required this.iconPath,
     required this.title,
     required this.description,
+    this.mobileView = false,
   });
 
   @override
@@ -32,7 +34,9 @@ class AdCard extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: mobileView
+                  ? CrossAxisAlignment.center
+                  : CrossAxisAlignment.start,
               children: [
                 CircleAvatar(
                   radius: 40,
