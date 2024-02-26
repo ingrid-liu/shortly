@@ -23,16 +23,20 @@ class MyApp extends StatelessWidget {
               fontSize: 18.0,
               color: CustomColors.neutralGray,
               fontWeight: FontWeight.w500,
-              letterSpacing: 0,
+              letterSpacing: 0.5,
             ),
             bodyMedium: TextStyle(
-                fontSize: 22.0,
-                color: CustomColors.neutralGrayishViolet,
-                fontWeight: FontWeight.w700),
+              fontSize: 22.0,
+              color: CustomColors.neutralGrayishViolet,
+              fontWeight: FontWeight.w700,
+              letterSpacing: 0.5,
+            ),
             bodyLarge: TextStyle(
-                fontSize: 40.0,
-                color: CustomColors.neutralVeryDarkViolet,
-                fontWeight: FontWeight.w700),
+              fontSize: 33.0,
+              color: CustomColors.neutralVeryDarkViolet,
+              fontWeight: FontWeight.w700,
+              letterSpacing: -1,
+            ),
           ),
         ));
   }

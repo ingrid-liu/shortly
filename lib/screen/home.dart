@@ -51,14 +51,14 @@ class HomePage extends StatelessWidget {
                       children: [
                         Shortener(mobileView: mobileView),
                         SizedBox(height: 100),
-                        Advertise(),
+                        Advertise(mobileView: mobileView),
                         SizedBox(height: 100),
                       ],
                     ),
                   ),
                 ],
               ),
-              const Boost(),
+              Boost(mobileView: mobileView),
               const Align(
                 alignment: Alignment.bottomCenter,
                 child: BottomNav(),

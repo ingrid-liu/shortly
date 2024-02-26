@@ -4,7 +4,8 @@ import 'package:shortly/global/color.dart';
 import 'package:shortly/widget/button.dart';
 
 class Boost extends StatelessWidget {
-  const Boost({super.key});
+  final bool mobileView;
+  const Boost({super.key, this.mobileView = false});
 
   @override
   Widget build(BuildContext context) {
@@ -13,14 +14,15 @@ class Boost extends StatelessWidget {
       children: [
         Container(
           width: double.infinity,
-          height: 250,
           decoration: const BoxDecoration(
-            color: CustomColors.neutralVeryDarkBlue,
+            color: CustomColors.primaryDarkViolet,
           ),
-        ),
-        SvgPicture.asset(
-          'assets/images/bg-boost-desktop.svg',
-          fit: BoxFit.cover,
+          child: SvgPicture.asset(
+            mobileView
+                ? 'assets/images/bg-boost-mobile.svg'
+                : 'assets/images/bg-boost-desktop.svg',
+            fit: BoxFit.cover,
+          ),
         ),
         Column(
           children: [
