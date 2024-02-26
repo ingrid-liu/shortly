@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shortly/widget/bottom_navigation.dart';
 import 'package:shortly/widget/top_navigation.dart';
+import 'package:shortly/widget/welcome.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -15,13 +16,10 @@ class HomePage extends StatelessWidget {
             child: const Column(
               children: [
                 TopNav(),
-                Center(
-                  child: Text('Main Content Here'),
-                ),
-                Text('Bottom Navigation Bar Placeholder'),
               ],
             ),
           ),
+          const Welcome(),
           const BottomNav(),
         ],
       ),
