@@ -7,7 +7,8 @@ import 'package:shortly/widget/icon.dart';
 import 'package:shortly/model/hyperlink.dart';
 
 class BottomNav extends StatefulWidget {
-  const BottomNav({super.key});
+  final bool mobileView;
+  const BottomNav({super.key, this.mobileView = false});
 
   @override
   State<BottomNav> createState() => _BottomNavState();
@@ -46,24 +47,33 @@ class _BottomNavState extends State<BottomNav> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(
-          top: 30.0, left: 170.0, right: 170.0, bottom: 30.0),
+      padding: widget.mobileView
+          ? const EdgeInsets.all(30)
+          : const EdgeInsets.only(
+              top: 30.0, left: 170.0, right: 170.0, bottom: 30.0),
       color: CustomColors.neutralVeryDarkViolet,
-      child: Row(
+      child: Flex(
+        direction: widget.mobileView ? Axis.vertical : Axis.horizontal,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: widget.mobileView
+            ? CrossAxisAlignment.center
+            : CrossAxisAlignment.start,
         children: [
-          SvgPicture.asset(
-            'assets/images/logo.svg',
-            height: 35,
-            colorFilter: (const ColorFilter.mode(
-              Colors.white,
-              BlendMode.srcIn,
-            )),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: widget.mobileView ? 50 : 0),
+            child: SvgPicture.asset(
+              'assets/images/logo.svg',
+              height: 35,
+              colorFilter: (const ColorFilter.mode(
+                Colors.white,
+                BlendMode.srcIn,
+              )),
+            ),
           ),
           const SizedBox(width: 40),
           for (var linkList in bottomLinkList) _buildColumnWithLinks(linkList),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: iconList
                 .map(
                   (icon) => Padding(
@@ -83,14 +93,18 @@ class _BottomNavState extends State<BottomNav> {
 
   Widget _buildColumnWithLinks(List<HyperLink> links) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: widget.mobileView
+          ? CrossAxisAlignment.center
+          : CrossAxisAlignment.start,
       children: [
         Link(
             hyperLink:
                 links[0].copyWith(highlightedColor: CustomColors.primaryCyan)),
         const SizedBox(height: 10),
         Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: widget.mobileView
+              ? CrossAxisAlignment.center
+              : CrossAxisAlignment.start,
           children: links
               .sublist(1)
               .map((link) => Padding(
@@ -103,6 +117,7 @@ class _BottomNavState extends State<BottomNav> {
                   )))
               .toList(),
         ),
+        const SizedBox(height: 30),
       ],
     );
   }

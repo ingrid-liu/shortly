@@ -59,10 +59,7 @@ class HomePage extends StatelessWidget {
                 ],
               ),
               Boost(mobileView: mobileView),
-              const Align(
-                alignment: Alignment.bottomCenter,
-                child: BottomNav(),
-              )
+              BottomNav(mobileView: mobileView)
             ]),
       ),
     );
