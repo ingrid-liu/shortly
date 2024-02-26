@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shortly/widget/bottom_navigation.dart';
+import 'package:shortly/widget/shortener.dart';
 import 'package:shortly/widget/top_navigation.dart';
 import 'package:shortly/widget/welcome.dart';
 
@@ -8,7 +9,9 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+        body: SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
             margin:
@@ -20,9 +23,27 @@ class HomePage extends StatelessWidget {
             ),
           ),
           const Welcome(),
+          Stack(
+            children: [
+              Positioned.fill(
+                top: 130,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Color.fromARGB(255, 237, 236, 239),
+                  ),
+                ),
+              ),
+              const Column(
+                children: [
+                  Shortener(),
+                  SizedBox(height: 100),
+                ],
+              ),
+            ],
+          ),
           const BottomNav(),
         ],
       ),
-    );
+    ));
   }
 }
