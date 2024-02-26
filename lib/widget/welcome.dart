@@ -4,57 +4,72 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'button.dart';
 
 class Welcome extends StatelessWidget {
-  const Welcome({super.key});
+  final bool mobileView;
+  const Welcome({super.key, this.mobileView = false});
 
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.only(left: 170),
+      padding: EdgeInsets.only(left: mobileView ? 20 : 170),
       child: Flex(
-        direction: screenSize.width < 800 ? Axis.vertical : Axis.horizontal,
+        direction: mobileView ? Axis.vertical : Axis.horizontal,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 50),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'More than just\nshorter links',
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        fontSize: 80,
-                        height: 1.1,
-                        letterSpacing: -1,
-                      ),
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  'Build your brand\'s recognition and get detailed\ninsights on how your links are performing.',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontWeight: FontWeight.w500),
-                ),
-                const SizedBox(height: 40),
-                const Button(
-                  displayText: 'Get Started',
-                  radius: Radius.circular(25),
-                ),
+        children: mobileView
+            ? [
+                _welcomeImage(),
+                SizedBox(height: 40),
+                _welcomeText(context),
+              ]
+            : [
+                _welcomeText(context),
+                _welcomeImage(),
               ],
-            ),
-          ),
-          ClipRRect(
-            child: Align(
-              alignment: Alignment.topLeft,
-              widthFactor: .75,
-              child: SvgPicture.asset(
-                'assets/images/illustration-working.svg',
-                height: 500,
+      ),
+    );
+  }
+
+  Widget _welcomeText(context) {
+    return Column(
+      crossAxisAlignment:
+          mobileView ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+      children: [
+        Text(
+          'More than just\nshorter links',
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                fontSize: 80,
+                height: 1.1,
+                letterSpacing: -1,
               ),
-            ),
-          )
-        ],
+          textAlign: mobileView ? TextAlign.center : null,
+        ),
+        const SizedBox(height: 16),
+        Text(
+          'Build your brand\'s recognition and get detailed\ninsights on how your links are performing.',
+          style: Theme.of(context)
+              .textTheme
+              .bodyMedium!
+              .copyWith(fontWeight: FontWeight.w500),
+          textAlign: mobileView ? TextAlign.center : null,
+        ),
+        const SizedBox(height: 40),
+        Center(
+          widthFactor: mobileView ? null : 1,
+          child: const Button(
+            displayText: 'Get Started',
+            radius: Radius.circular(25),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _welcomeImage() {
+    return Align(
+      alignment: Alignment.topLeft,
+      widthFactor: .70,
+      child: SvgPicture.asset(
+        'assets/images/illustration-working.svg',
+        height: 500,
       ),
     );
   }

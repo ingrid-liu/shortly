@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-              const Welcome(),
+              Welcome(mobileView: mobileView),
               Stack(
                 children: [
                   Positioned.fill(
