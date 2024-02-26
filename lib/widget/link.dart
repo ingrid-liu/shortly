@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../model/hyperlink.dart';
+import 'package:shortly/model/hyperlink.dart';
 
 class Link extends StatefulWidget {
   final HyperLink hyperLink;
@@ -31,6 +31,7 @@ class _LinkState extends State<Link> {
                 color: _isHovering
                     ? widget.hyperLink.highlightedColor
                     : widget.hyperLink.textColor,
+                fontWeight: widget.hyperLink.fontStyle.fontWeight,
               ),
         ),
       ),
