@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shortly/api/url_shorten.dart';
 import 'package:shortly/global/color.dart';
 import 'package:shortly/widget/button.dart';
 import 'package:shortly/widget/shortened_url_entry.dart';
@@ -125,7 +126,7 @@ class _ShortenerState extends State<Shortener> {
     setState(() {
       _inputError = false;
     });
-    String shortenedUrl = "Placeholder for shortened URL";
+    String shortenedUrl = await APIs.getShortenedUrl(urlInputController.text);
     setState(() {
       if (urls.any((url) => url['rawUrl'] == urlInputController.text)) {
         return;
