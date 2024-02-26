@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shortly/widget/advertise.dart';
+import 'package:shortly/widget/boost.dart';
 import 'package:shortly/widget/bottom_navigation.dart';
 import 'package:shortly/widget/shortener.dart';
 import 'package:shortly/widget/top_navigation.dart';
@@ -9,41 +11,47 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-            margin:
-                const EdgeInsets.symmetric(vertical: 30.0, horizontal: 170.0),
-            child: const Column(
-              children: [
-                TopNav(),
-              ],
-            ),
-          ),
-          const Welcome(),
-          Stack(
+      body: SingleChildScrollView(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Positioned.fill(
-                top: 130,
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 237, 236, 239),
-                  ),
+              Container(
+                margin: const EdgeInsets.symmetric(
+                    vertical: 30.0, horizontal: 170.0),
+                child: const Column(
+                  children: [
+                    TopNav(),
+                  ],
                 ),
               ),
-              const Column(
+              const Welcome(),
+              Stack(
                 children: [
-                  Shortener(),
-                  SizedBox(height: 100),
+                  Positioned.fill(
+                    top: 130,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        color: Color.fromARGB(255, 237, 236, 239),
+                      ),
+                    ),
+                  ),
+                  const Column(
+                    children: [
+                      Shortener(),
+                      SizedBox(height: 100),
+                      Advertise(),
+                      SizedBox(height: 100),
+                    ],
+                  ),
                 ],
               ),
-            ],
-          ),
-          const BottomNav(),
-        ],
+              const Boost(),
+              const Align(
+                alignment: Alignment.bottomCenter,
+                child: BottomNav(),
+              )
+            ]),
       ),
-    ));
+    );
   }
 }
